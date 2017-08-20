@@ -1,5 +1,5 @@
 
-var button=document.getElementById('counter');
+/*var button=document.getElementById('counter');
 
 
 button.onclick = function() {      
@@ -23,7 +23,7 @@ button.onclick = function() {
                         request.send(null);
 };
 
-
+*/
 var nameinput = document.getElementById('name');
 var name=nameinput.value;
 
