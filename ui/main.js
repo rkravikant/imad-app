@@ -14,7 +14,7 @@ button.onclick = function()
                                             { 
                                              counter = request.responseText;  */
                                               counter=counter+1;
-                                             var span = document.getElementById('span');
+                                             var span = document.getElementById('count');
                                               span.innerHTML = counter.toString();
                                             
                                     
