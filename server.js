@@ -75,7 +75,11 @@ function createtemplate(object)
     return template;
 }
 
-
+app.get('/:articlename', function (req, res) {
+    var articlename=req.params.articlename; // there is one more method for taking params by 
+    
+  res.send(createtemplate(articles[articlename]));
+});
 
 var counter=0;
 app.get('/counter', function (req, res) {
@@ -83,11 +87,7 @@ app.get('/counter', function (req, res) {
   res.send(counter.toString());
 });
 
-app.get('/:articlename', function (req, res) {
-    var articlename=req.params.articlename; // there is one more method for taking params by 
-    
-  res.send(createtemplate(articles[articlename]));
-});
+
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
