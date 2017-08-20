@@ -57,7 +57,7 @@ function createtemplate(object)
     ${heading}
     </h>
     <div>
-    ${date}
+    
     </div>
     <div>
     ${content}
