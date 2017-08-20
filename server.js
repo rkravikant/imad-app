@@ -75,11 +75,6 @@ function createtemplate(object)
     return template;
 }
 
-app.get('/:articlename', function (req, res) {
-    var articlename=req.params.articlename; // there is one more method for taking params by 
-    
-  res.send(createtemplate(articles[articlename]));
-});
 
 var counter=0;
 app.get('/counter', function (req, res) {
@@ -107,6 +102,12 @@ app.get('/ui/ab.jpg', function (req, res) {
 
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
+});
+
+app.get('/:articlename', function (req, res) {
+    var articlename=req.params.articlename; // there is one more method for taking params by 
+    
+  res.send(createtemplate(articles[articlename]));
 });
 
 
