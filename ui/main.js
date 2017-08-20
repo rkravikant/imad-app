@@ -26,8 +26,7 @@ button.onclick = function() {
 */
 
 
-var nameinput = document.getElementById('name');
-var nam=nameinput.value;
+
 
 var submit = document.getElementById('submit');
 submit.onclick = function() {      
@@ -52,7 +51,10 @@ submit.onclick = function() {
                                             }
                                         }
                                     };
-                        request.open('GET', 'http://ravikantvermahbti.imad.hasura-app.io/submit-name?name='+nam, true);
+                                    
+                                    var nameinput = document.getElementById('name');
+                                             var name=nameinput.value;
+                        request.open('GET', 'http://ravikantvermahbti.imad.hasura-app.io/submit-name?name='+name, true);
                         request.send(null);
 };
 
