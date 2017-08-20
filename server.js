@@ -15,6 +15,7 @@ var articles={
         <h>heading 2</h>`
         
     },
+    
      'article2':{
         date:`string,string`,
         heading:'heading for article2',
@@ -24,6 +25,7 @@ var articles={
         <h>heading 2</h>`
         
     },
+    
      'article3':{
         date:`string,string`,
         title:'about article one',
@@ -68,7 +70,7 @@ function createtemplate(object)
     </html>`;
     
     return template;
-};
+}
 
 app.get('/:articlename', function (req, res) {
     var articlename=req.param.articlename;
