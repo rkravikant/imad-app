@@ -76,10 +76,16 @@ function createtemplate(object)
 }
 
 app.get('/:articlename', function (req, res) {
-    var articlename=req.params.articlename;
+    var articlename=req.params.articlename; // there is one more method for taking params by 
+    
   res.send(createtemplate(articles[articlename]));
 });
 
+var counter=0;
+app.get('/counter', function (req, res) {
+    counter=counter+1;
+  res.send(counter.toString());
+});
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
