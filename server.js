@@ -39,11 +39,12 @@ var articles={
 
 function createtemplate(object)
 {
-    var date=object.date;
-    var title=object.title;
-    var content=object.content;
-    var heading=object.heading;
-    var template= `
+    var date = object.date;
+    var title = object.title;
+    var content = object.content;
+    var heading = object.heading;
+    
+    var template=`
     <html>
     <title>
     ${title}
@@ -73,7 +74,7 @@ function createtemplate(object)
 }
 
 app.get('/:articlename', function (req, res) {
-    var articlename=req.param.articlename;
+    var articlename=req.params.articlename;
   res.send(createtemplate(articles[articlename]));
 });
 
