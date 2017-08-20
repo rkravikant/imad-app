@@ -8,18 +8,18 @@ app.use(morgan('combined'));
 var articles={
     'article1':{
         date:`string,string`,
-        title:'about article one',
+        title:'about article 1',
         heading:'heading for article1',
         content:`<h>writing something</h>
         <p>this is articleone which is trying to do things dynamically </p>
-        <h>heading 2</h>`
+        <h>heading 1</h>`
         
     },
     
      'article2':{
         date:`string,string`,
         heading:'heading for article2',
-        title:'about article one',
+        title:'about article 2',
         content:`<h>writing something</h>
         <p>this is articleone which is trying to do things dynamically </p>
         <h>heading 2</h>`
@@ -28,11 +28,11 @@ var articles={
     
      'article3':{
         date:`string,string`,
-        title:'about article one',
+        title:'about article 3',
         heading:'heading for article3',
         content:`<h>writing something</h>
         <p>this is articleone which is trying to do things dynamically </p>
-        <h>heading 2</h>`
+        <h>heading 3</h>`
         
     }
 };
