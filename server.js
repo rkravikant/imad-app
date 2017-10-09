@@ -10,8 +10,6 @@ var config={
     port:'5432',
     password:process.env.DB_PASSWORD
 };
-//create pool some where globally so its lifetime lasts for as long as your app is running
-var pool = new pool(config);
 
 var app = express();
 app.use(morgan('combined'));
@@ -85,6 +83,9 @@ function createtemplate(object)
     
     return template;
 }
+
+//create pool some where globally so its lifetime lasts for as long as your app is running
+var pool = new pool(config);
 
 app.get('/test-db', function (req, res) {
 pool.query('select*from test', function (err, result){
