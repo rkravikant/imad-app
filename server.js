@@ -145,8 +145,10 @@ app.get('/submit-name', function (req, res) {// url like submit-name?name=xxxx
 
 app.get('/articles/:articlename', function (req, res) {
   //  var articlename=req.params.articlename; // there is one more method for sending data to server named query parameter 
-    pool.query("select*from article where title='"+req.params.articlename+"'", function (err, result){
-    if(err){
+    // pool.query("select*from article where title='"+req.params.articlename+"'", function (err, result) this is vulenarable to attack
+   
+    pool.query("select*from article where title=$1", [req.params.articlename], function (err, result){ // by this we can insert many $1,$2..
+    if(err){                                                                                           // and there values in array []
     res.status(500).send(err.toString());
     }
     else{
