@@ -71,7 +71,9 @@ function createtemplate(object)
     ${heading}
     </h>
     <div>
-    
+    </div>
+    <div>
+    ${date.toDateString()}
     </div>
     <div>
     ${content}
@@ -141,10 +143,24 @@ app.get('/submit-name', function (req, res) {// url like submit-name?name=xxxx
 });
 
 
-app.get('/:articlename', function (req, res) {
-    var articlename=req.params.articlename; // there is one more method for sending data to server named query parameter 
+app.get('/articles/:articlename', function (req, res) {
+  //  var articlename=req.params.articlename; // there is one more method for sending data to server named query parameter 
+    pool.query("select*from article where itle='"+req.params.articlename+"'", function (err, result){
+    if(err){
+    res.status(500).send(err.toString());
+    }
+    else{
+        if(result.rows.length === 0){
+            res.status(404).send("requested article is not found");
+        }
+        else{
+          var articledata = result.rows[0];
+          res.send(createtemplate(articledata));
+        }
     
-  res.send(createtemplate(articles[articlename]));
+    }                                      
+});
+  
 });
 
 
