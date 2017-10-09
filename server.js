@@ -145,7 +145,7 @@ app.get('/submit-name', function (req, res) {// url like submit-name?name=xxxx
 
 app.get('/articles/:articlename', function (req, res) {
   //  var articlename=req.params.articlename; // there is one more method for sending data to server named query parameter 
-    pool.query("select*from article where itle='"+req.params.articlename+"'", function (err, result){
+    pool.query("select*from article where title='"+req.params.articlename+"'", function (err, result){
     if(err){
     res.status(500).send(err.toString());
     }
