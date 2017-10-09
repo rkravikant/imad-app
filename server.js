@@ -2,6 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
+var crypto = require('crypto');
 
 var config={
     user:'ravikantvermahbti',
@@ -13,38 +14,6 @@ var config={
 
 var app = express();
 app.use(morgan('combined'));
-
-var articles={
-    'article1':{
-        date:`string,string`,
-        title:'about article 1',
-        heading:'heading for article1',
-        content:`<h>writing something</h>
-        <p>this is articleone which is trying to do things dynamically </p>
-        <h>heading 1</h>`
-        
-    },
-    
-     'article2':{
-        date:`string,string`,
-        heading:'heading for article2',
-        title:'about article 2',
-        content:`<h>writing something</h>
-        <p>this is articleone which is trying to do things dynamically </p>
-        <h>heading 2</h>`
-        
-    },
-    
-     'article3':{
-        date:`string,string`,
-        title:'about article 3',
-        heading:'heading for article3',
-        content:`<h>writing something</h>
-        <p>this is articleone which is trying to do things dynamically </p>
-        <h>heading 3</h>`
-        
-    }
-};
 
 function createtemplate(object)
 {
@@ -148,7 +117,7 @@ app.get('/articles/:articlename', function (req, res) {
     // pool.query("select*from article where title='"+req.params.articlename+"'", function (err, result) this is vulenarable to attack
    
     pool.query("select*from article where title=$1", [req.params.articlename], function (err, result){ // by this we can insert many $1,$2..
-    if(err){                                                                                           // and there values in array []
+    if(err){                           // this is secure way, not allows sql injection, which was in upper case // and there values in array []
     res.status(500).send(err.toString());
     }
     else{
@@ -163,6 +132,17 @@ app.get('/articles/:articlename', function (req, res) {
     }                                      
 });
   
+});
+
+function hash(input, salt){
+    var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
+    return hashed.toString('hex'); // converting reurned bytes to readable string using hexadecimal encoding
+    
+}
+
+app.get('/hash/:input', function (req, res) {
+   var hashedstring = hash(input,'this is a random string as salt');
+  res.send(hashedstring);
 });
 
 
