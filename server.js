@@ -1,6 +1,17 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+var pool = require('pg').pool;
+
+var config={
+    user:'ravikantvermahbti',
+    database:'ravikantvermahbti',
+    host:'db.imad.hasura-app.io',
+    port:'5432',
+    password:process.env.DB_PASSWORD
+};
+//create pool some where globally so its lifetime lasts for as long as your app is running
+var pool = new pool(config);
 
 var app = express();
 app.use(morgan('combined'));
@@ -74,6 +85,18 @@ function createtemplate(object)
     
     return template;
 }
+
+app.get('/test-db', function (req, res) {
+pool.query('select*from test', function (err, result){
+    if(err){
+    res.status(500).send(err.toString());
+    }
+    else{
+    res.send(JSON.stringify(result.rows)); // result is an object returned by database which will print evry thing like command rows info ..
+    }                                      // so we only printing rows because we need only data
+});
+
+});
 
 
 var counter=0;
