@@ -163,8 +163,7 @@ app.post('/login', function(req, res){
     
     var username = req.body.username;
     var password = req.body.password;
-    
-    var dbstring = hash(password, salt);
+   
     
     pool.query("select * from 'user' where username =$1)", [username], function (err, result){
     if(err){                         
