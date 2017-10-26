@@ -165,12 +165,12 @@ app.post('/login', function(req, res){
     var password = req.body.password;
    
     
-    pool.query('select * from "user" where username =$1', [username], function (err, result){
+    pool.query('select * from "user" where username =  $1', [username], function (err, result){
     if(err){                         
     res.status(500).send(err.toString());
     }
     else{
-          if(result.rows[0].length() === 0){
+          if(result.rows.length() === 0){
             res.status(404).send("Requested user name is not registered");
             }
             else{
