@@ -136,7 +136,7 @@ app.get('/articles/:articlename', function (req, res) {
   
 });
 
-app.post('/create-user', function(req, res){ // we dont send password by get because it will be printed in logs, if one has acces to logs can see password
+app.post('/signup', function(req, res){ // we dont send password by get because it will be printed in logs, if one has acces to logs can see password
 // extracting username and password from request body
     var username = req.body.username;
     var password = req.body.password;
