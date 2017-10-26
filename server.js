@@ -147,7 +147,7 @@ app.post('/signup', function(req, res){ // we dont send password by get because 
     var salt = crypto.randomBytes(128).toString('hex');
     var dbstring = hash(password, salt);
     
-    pool.query("insert into 'user' (password, username) values ($1,$2)", [username, dbstring], function (err, result){ // "user" because user is also a keyword in postgress
+    pool.query("insert into 'user' (password, username) values ($1,$2)", [dbstring,username], function (err, result){ // "user" because user is also a keyword in postgress
     if(err){                           // this is secure way, not allows sql injection, which was in upper case // and there values in array []
     res.status(500).send(err.toString());
     }
@@ -190,7 +190,7 @@ app.post('/login', function(req, res){
 
 function hash(input, salt){
     var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');// will apend input to salt value and convert it into 512byte string by applying 10000 times this hash funion.
-    return ["pbkdf2", "10000", "salt", "hashed.toString('hex')"].join($); // converting reurned bytes to readable string using hexadecimal encoding
+    return ["pbkdf2", "10000", salt, hashed.toString('hex')].join($); // converting reurned bytes to readable string using hexadecimal encoding
     
 }
 
