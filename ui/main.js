@@ -59,7 +59,7 @@ submit.onclick = function() {
 };
 
 */
-
+/*
 var submit1 = document.getElementById('submit-btn1');
 submit1.onclick = function(){      
                              
@@ -90,8 +90,8 @@ submit1.onclick = function(){
                         request.send(JSON.stringify({username: username,password: password}));
 };
 
+*/
 
-/*
 var submit2 = document.getElementById('submit-btn2');
 submit2.onclick = function() {      
                              
@@ -125,4 +125,4 @@ submit2.onclick = function() {
                         request.setRequestHeader('Content-Type','application/json');
                         request.send(JSON.stringify({username: username,password: password}));
 };
-*/
+
