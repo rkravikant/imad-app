@@ -181,7 +181,7 @@ app.post('/login', function(req, res){
             res.send("credential matched   Welcome");
             }
             else{
-                res.send("Entered password is incorrect");
+                res.status(404).send("Entered password is incorrect");
             }
         }
     }
