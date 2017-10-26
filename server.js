@@ -148,7 +148,7 @@ now for making post request we have to do it from main.js but for practice we ca
     var salt = crypto.randomBytes(128).toString('hex');
     var dbstring = hash(password, salt);
     
-    pool.query('insert into "user" (password, username) values ($1,$2)', [dbstring,username], function (err, result){ // "user" because user is also a keyword in postgress
+    pool.query('insert into "user" (username, password) values ($1,$2)', [username, dbstring], function (err, result){ // "user" because user is also a keyword in postgress
     if(err){                           // this is secure way, not allows sql injection, which was in upper case // and there values in array []
     res.status(500).send(err.toString());
     }
@@ -175,7 +175,7 @@ app.post('/login', function(req, res){
             }
             else{
             var dbstring = result.rows[0].password;
-              var salt = dbstring.split("$")[2]; // salt is 3rd element in array
+              var salt = dbstring.split('$')[2]; // salt is 3rd element in array
               var hashedpassword = hash(password,salt);
             if(dbstring === hashedpassword)  
             res.send("credential matched   Welcome");
