@@ -3,7 +3,7 @@ var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
-var bodyparser = require('body-parser');
+var bodyParser = require('body-parser');
 
 var config={
     user:'ravikantvermahbti',
@@ -15,7 +15,7 @@ var config={
 
 var app = express();
 app.use(morgan('combined'));
-app.use(bodyparser.json()); // loading json content to req body
+app.use(bodyParser.json()); // loading json content to req body
 
 function createtemplate(object)
 {
@@ -140,10 +140,11 @@ app.post('/signup', function(req, res){ // we dont send password by get because 
 // extracting username and password from request body
     var username = req.body.username;
     var password = req.body.password;
-// now where is this data comming from in req body and what is format of data, lets take json type, so we have to tell express app to when it see the json content in request it will put it into req body that is done with the help of body parser.
+    
+/*now where is this data comming from in req body and what is format of data, lets take json type, so we have to tell express app to when it see the json content in request it will put it into req body that is done with the help of body parser.
    
-//now for making post request we have to do it from main.js but for practice we can do it from curl tool, curl will print the whole html in cmd(if we use from ssh) like browser rather than rendering.we can see whole detail like which page is being requested and what protocols, req method being used. so by curl we can send post request(with data) without any page(web-html..)
-
+now for making post request we have to do it from main.js but for practice we can do it from curl tool, curl will print the whole html in cmd(if we use from ssh) like browser rather than rendering.we can see whole detail like which page is being requested and what protocols, req method being used. so by curl we can send post request(with data) without any page(web-html..)
+*/
     var salt = crypto.randomBytes(128).toString('hex');
     var dbstring = hash(password, salt);
     
