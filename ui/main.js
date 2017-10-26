@@ -90,6 +90,8 @@ submit1.onclick = function() {
                         request.send(JSON.stringify({username:username,password:pasword}));
 };
 
+
+/*
 var submit2 = document.getElementById('submit-btn2');
 submit2.onclick = function() {      
                              
@@ -123,3 +125,4 @@ submit2.onclick = function() {
                         request.setRequestHeader('Content-Type','application/json');
                         request.send(JSON.stringify({username:username,password:pasword}));
 };
+*/
