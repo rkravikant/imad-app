@@ -165,7 +165,7 @@ app.post('/login', function(req, res){
     var password = req.body.password;
    
     
-    pool.query('select * from "user" where username =  $1', [username], function (err, result){
+    pool.query('select*from "user" where username = $1', [username], function (err, result){
     if(err){                         
     res.status(500).send(err.toString());
     }
@@ -176,9 +176,10 @@ app.post('/login', function(req, res){
             else{
             var dbstring = result.rows[0].password;
               var salt = dbstring.split('$')[2]; // salt is 3rd element in array
-              var hashedpassword = hash(password,salt);
-            if(dbstring === hashedpassword)  
+              var hashedpassword = hash(password, salt);
+            if(dbstring === hashedpassword){ 
             res.send("credential matched   Welcome");
+            }
             else{
                 res.status(404).send("Entered password is incorrect");
             }
