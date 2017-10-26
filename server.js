@@ -4,6 +4,7 @@ var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var config={
     user:'ravikantvermahbti',
@@ -13,9 +14,17 @@ var config={
     password:process.env.DB_PASSWORD
 };
 
+// telling express to use these included libraries
+
 var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json()); // loading json content to req body
+app.use(session({
+    
+    secret: 'random value use to encrypt the cookie',
+    cookie: {maxAge: 1000 * 60 * 60 * 24 * 30} // cookies age is in milli second so 1000 ms, 60 sec, 60 min, 24hr, 30d means 1mnth
+    
+}));
 
 function createtemplate(object)
 {
@@ -178,7 +187,17 @@ app.post('/login', function(req, res){
               var salt = dbstring.split('$')[2]; // salt is 3rd element in array
               var hashedpassword = hash(password, salt);
             if(dbstring === hashedpassword){ 
-            res.send("credential matched   Welcome");
+                
+            req.session.auth = {userId: result.rows[0].id};
+            
+            // there is session object in request created by express-session like body(req.body)
+           // object in request which is created by body-parser, ther will be a key auth in session
+        //in background what is happening is session middle ware is setting a cookie with session id(which is randomly generated)    
+         // internally on server side it maps the session id to an object,this object contains a value auth
+         // this auth contains an object userId
+         // session library makes sure auth object stored internally as soon as response is sent.
+            
+            res.send("credential matched   Welcome");  
             }
             else{
                 res.status(404).send("Entered password is incorrect");
@@ -187,6 +206,22 @@ app.post('/login', function(req, res){
     }
     
 });
+});
+
+app.get('/check-session', function (req, res) {
+    
+    if(req.session && req.session.auth && req.session.auth.userId){
+        res.send('you are logged in' + req.session.auth.userId.toString());
+    }
+    else{
+        res.send('you are not logged in');
+    }
+});
+
+app.get('/logout', function (req, res) {
+    
+    delete req.session.auth;
+    res.send('logged out');
 });
 
 function hash(input, salt){
