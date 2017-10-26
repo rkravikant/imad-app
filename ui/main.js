@@ -59,7 +59,7 @@ submit.onclick = function() {
 };
 
 */
-
+/*
 var submit1 = document.getElementById('submit-btn1');
 submit1.onclick = function() {      
                              
@@ -87,11 +87,11 @@ submit1.onclick = function() {
                                              
                         request.open('POST', 'http://ravikantvermahbti.imad.hasura-app.io/signup', true);
                         request.setRequestHeader('Content-Type','application/json');
-                        request.send(JSON.stringify({username:username,password:password}));
+                        request.send(JSON.stringify({username: username,password: password}));
 };
+*/
 
 
-/*
 var submit2 = document.getElementById('submit-btn2');
 submit2.onclick = function() {      
                              
@@ -123,6 +123,6 @@ submit2.onclick = function() {
                                              
                         request.open('POST', 'http://ravikantvermahbti.imad.hasura-app.io/login', true);
                         request.setRequestHeader('Content-Type','application/json');
-                        request.send(JSON.stringify({username:username,password:pasword}));
+                        request.send(JSON.stringify({username: username,password: password}));
 };
-*/
+
