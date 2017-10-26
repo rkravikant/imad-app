@@ -87,7 +87,7 @@ submit1.onclick = function() {
                                              
                         request.open('POST', 'http://ravikantvermahbti.imad.hasura-app.io/signup', true);
                         request.setRequestHeader('Content-Type','application/json');
-                        request.send(JSON.stringify({username:username,password:pasword}));
+                        request.send(JSON.stringify({username:username,password:password}));
 };
 
 
