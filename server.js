@@ -25,7 +25,6 @@ app.use(session({
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 30} // cookies age is in milli second so 1000 ms, 60 sec, 60 min, 24hr, 30d means 1mnth
     
 }));
-app.use(express.cookieParser());
 
 function createtemplate(object)
 {
@@ -225,22 +224,6 @@ app.get('/logout', function (req, res) {
     res.send('logged out');
 });
 
-app.get('/setcookie', function (req, res) {
-  var cookie = req.cookies.cookieName;
-  if (cookie === undefined)
-  {
-    
-    res.cookie('Ravikant','24', { maxAge: 900000, httpOnly: true });
-    console.log('cookie created successfully');
-    res.send('cookie created successfully');
-  } 
-  else
-  {
-    console.log('cookie exists', cookie);
-     res.send('cookie exisst'+cookie);
-  } 
-  next();
-});
 
 function hash(input, salt){
     var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');// will apend input to salt value and convert it into 512byte string by applying 10000 times this hash funion.
